@@ -61,6 +61,7 @@
 
 <section id="soilPage" class="hidden">
   <button class="back-btn" id="soilBack">← <span data-i18n="back">بازگشت</span></button>
+
   <div class="page-heading">
     <span class="eyebrow">SOIL TRIAXIAL TEST</span>
     <h2 data-i18n="soilMethods">انتخاب روش آزمایش خاک</h2>
@@ -69,17 +70,28 @@
   <div class="method-list">
     <button class="method-card" data-method="UU">
       <div class="method-code">UU</div>
-      <div><h3>Unconsolidated Undrained</h3><p data-i18n="uuDesc">تحکیم‌نیافته و زهکشی‌نشده</p></div>
+      <div>
+        <h3>Unconsolidated Undrained</h3>
+        <p data-i18n="uuDesc">تحکیم‌نیافته و زهکشی‌نشده</p>
+      </div>
       <span>←</span>
     </button>
+
     <button class="method-card" data-method="CU">
       <div class="method-code">CU</div>
-      <div><h3>Consolidated Undrained</h3><p data-i18n="cuDesc">تحکیم‌یافته و زهکشی‌نشده</p></div>
+      <div>
+        <h3>Consolidated Undrained</h3>
+        <p data-i18n="cuDesc">تحکیم‌یافته و زهکشی‌نشده</p>
+      </div>
       <span>←</span>
     </button>
+
     <button class="method-card" data-method="CD">
       <div class="method-code">CD</div>
-      <div><h3>Consolidated Drained</h3><p data-i18n="cdDesc">تحکیم‌یافته و زهکشی‌شده</p></div>
+      <div>
+        <h3>Consolidated Drained</h3>
+        <p data-i18n="cdDesc">تحکیم‌یافته و زهکشی‌شده</p>
+      </div>
       <span>←</span>
     </button>
   </div>
@@ -87,11 +99,13 @@
 
 <section id="rockPage" class="hidden">
   <button class="back-btn" id="rockBack">← <span data-i18n="back">بازگشت</span></button>
+
   <div class="page-heading">
     <span class="eyebrow">ROCK TRIAXIAL TEST</span>
     <h2 data-i18n="rockTitle">آزمایش سه‌محوری سنگ</h2>
     <p data-i18n="rockMethodDesc">استاندارد ASTM D7012</p>
   </div>
+
   <div class="coming-card">
     <h3>ASTM D7012</h3>
     <p data-i18n="rockComing">بخش آزمایش سنگ در مرحله توسعه قرار دارد.</p>
@@ -114,17 +128,25 @@
 
   <div class="form-card">
     <h3 data-i18n="sampleInfo">۱. مشخصات نمونه</h3>
+
     <div class="form-grid">
-      <label><span data-i18n="sampleName">شناسه نمونه</span>
+      <label>
+        <span data-i18n="sampleName">شناسه نمونه</span>
         <input id="sampleName" type="text" placeholder="UU-01" value="UU-01">
       </label>
-      <label><span data-i18n="diameter">قطر اولیه (mm)</span>
+
+      <label>
+        <span data-i18n="diameter">قطر اولیه (mm)</span>
         <input id="diameter" type="number" min="0.01" step="any" value="38">
       </label>
-      <label><span data-i18n="height">ارتفاع اولیه (mm)</span>
+
+      <label>
+        <span data-i18n="height">ارتفاع اولیه (mm)</span>
         <input id="height" type="number" min="0.01" step="any" value="76">
       </label>
-      <label><span data-i18n="confining">فشار محصورکننده σ₃ (kPa)</span>
+
+      <label>
+        <span data-i18n="confining">فشار محصورکننده σ₃ (kPa)</span>
         <input id="confining" type="number" min="0" step="any" value="100">
       </label>
     </div>
@@ -149,8 +171,13 @@
     </div>
 
     <div class="actions">
-      <button class="secondary-btn" id="addReading">+ <span data-i18n="addReading">افزودن قرائت</span></button>
-      <button class="primary-btn" id="calculate"> <span data-i18n="calculate">محاسبه نتایج</span></button>
+      <button class="secondary-btn" id="addReading">
+        + <span data-i18n="addReading">افزودن قرائت</span>
+      </button>
+
+      <button class="primary-btn" id="calculate">
+        <span data-i18n="calculate">محاسبه نتایج</span>
+      </button>
     </div>
   </div>
 
@@ -163,16 +190,19 @@
         <strong id="peakQ">—</strong>
         <small>kPa</small>
       </div>
+
       <div class="result-card">
         <span data-i18n="undrainedStrength">مقاومت برشی زهکشی‌نشده</span>
         <strong id="su">—</strong>
         <small>kPa</small>
       </div>
+
       <div class="result-card">
         <span data-i18n="peakStrain">کرنش در نقطه اوج</span>
         <strong id="peakStrain">—</strong>
         <small>%</small>
       </div>
+
       <div class="result-card">
         <span data-i18n="majorStress">تنش اصلی بزرگ در اوج</span>
         <strong id="sigma1">—</strong>
@@ -182,6 +212,7 @@
 
     <div class="form-card">
       <h3 data-i18n="calculatedTable">جدول نتایج قرائت‌ها</h3>
+
       <div class="table-wrap">
         <table>
           <thead>
@@ -196,10 +227,29 @@
           <tbody id="resultsBody"></tbody>
         </table>
       </div>
-      <button class="secondary-btn" id="printResults" data-i18n="print">چاپ نتایج</button>
+    </div>
+
+    <!-- UU Charts -->
+
+    <div class="form-card">
+      <h3 data-i18n="stressStrainChartTitle">
+        نمودار تنش انحرافی–کرنش محوری
+      </h3>
+      <div id="uuStressStrainChart"></div>
+    </div>
+
+    <div class="form-card">
+      <h3 data-i18n="mohrChartTitle">
+        دایره موهر در لحظه گسیختگی
+      </h3>
+      <div id="uuMohrChart"></div>
     </div>
 
     <p class="hint" id="resultNote"></p>
+
+    <button class="secondary-btn" id="printResults" data-i18n="print">
+      چاپ نتایج
+    </button>
   </section>
 </section>
 
@@ -210,6 +260,10 @@
   <span data-i18n="footer">نرم‌افزار تخصصی مهندسی ژئوتکنیک</span>
 </footer>
 
+<!-- Scripts: dependency order is important -->
+<script src="calculations/uu.js"></script>
+<script src="charts/uu-charts.js"></script>
 <script src="src.js"></script>
+
 </body>
 </html>
