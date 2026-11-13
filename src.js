@@ -154,6 +154,7 @@ function addReading(displacement = '', load = '') {
   readingCount++;
 
   const row = document.createElement('tr');
+
   row.innerHTML = `
     <td>${readingCount}</td>
     <td>
@@ -185,6 +186,7 @@ function addReading(displacement = '', load = '') {
   });
 
   $('readingsBody').appendChild(row);
+
   return row;
 }
 
@@ -203,8 +205,10 @@ function calculateUU() {
   const height = getInput('height');
   const confining = getInput('confining');
 
-  if (!Number.isFinite(diameter) || !Number.isFinite(height) ||
-      diameter <= 0 || height <= 0) {
+  if (!Number.isFinite(diameter) ||
+      !Number.isFinite(height) ||
+      diameter <= 0 ||
+      height <= 0) {
     alert(translations[currentLanguage].invalidGeometry);
     return;
   }
@@ -222,12 +226,16 @@ function calculateUU() {
   }
 
   const initialArea = Math.PI * diameter * diameter / 4;
-
   const results = [];
 
   for (const row of rows) {
-    const displacement = Number(row.querySelector('.displacement').value);
-    const load = Number(row.querySelector('.axial-load').value);
+    const displacement = Number(
+      row.querySelector('.displacement').value
+    );
+
+    const load = Number(
+      row.querySelector('.axial-load').value
+    );
 
     if (!Number.isFinite(displacement) ||
         !Number.isFinite(load) ||
@@ -244,8 +252,9 @@ function calculateUU() {
     // Constant-volume corrected area
     const correctedArea = initialArea / (1 - strain);
 
-    // kN to N; N/mm² to kPa
-    const deviatorStress = (load * 1000 / correctedArea) * 1000;
+    // Deviator stress (kPa)
+    const deviatorStress =
+      (load * 1000 / correctedArea) * 1000;
 
     // Major principal total stress
     const sigma1 = confining + deviatorStress;
@@ -260,19 +269,22 @@ function calculateUU() {
     });
   }
 
-  // Maximum deviator stress
+  // Peak deviator stress
   const peak = results.reduce((max, item) =>
     item.deviatorStress > max.deviatorStress ? item : max
   );
 
-  // Undrained shear strength under φu = 0 assumption
+  // Undrained shear strength assuming φu = 0
   const su = peak.deviatorStress / 2;
 
+  // Display numerical results
   $('peakQ').textContent = peak.deviatorStress.toFixed(2);
   $('su').textContent = su.toFixed(2);
-  $('peakStrain').textContent = (peak.strain * 100).toFixed(3);
+  $('peakStrain').textContent =
+    (peak.strain * 100).toFixed(3);
   $('sigma1').textContent = peak.sigma1.toFixed(2);
 
+  // Results table
   $('resultsBody').innerHTML = results.map((item, index) => `
     <tr>
       <td>${index + 1}</td>
@@ -283,10 +295,80 @@ function calculateUU() {
     </tr>
   `).join('');
 
-  $('resultNote').textContent = translations[currentLanguage].resultNote;
+  $('resultNote').textContent =
+    translations[currentLanguage].resultNote;
 
+  // Prepare chart input
+  const chartSpecimen = {
+    name: 'Specimen 1',
+    diameter,
+    height,
+    confiningPressure: confining,
+    areaCorrection: true,
+    readings: results.map(item => ({
+      displacement: item.displacement,
+      load: item.load
+    }))
+  };
+
+  // Draw charts
+  try {
+    if (!window.TriaxialUUCharts) {
+      throw new Error('UU Charts module is not loaded.');
+    }
+
+    window.TriaxialUUCharts.renderStressStrain(
+      '#uuStressStrainChart',
+      chartSpecimen,
+      {
+        title: currentLanguage === 'fa'
+          ? 'نمودار تنش انحرافی–کرنش محوری'
+          : 'Deviator Stress–Axial Strain',
+        xLabel: currentLanguage === 'fa'
+          ? 'کرنش محوری (%)'
+          : 'Axial strain (%)',
+        yLabel: currentLanguage === 'fa'
+          ? 'تنش انحرافی (kPa)'
+          : 'Deviator stress (kPa)'
+      }
+    );
+
+    window.TriaxialUUCharts.renderMohrCircles(
+      '#uuMohrChart',
+      chartSpecimen,
+      {
+        phiDeg: 0,
+        cohesion: su
+      },
+      {
+        title: currentLanguage === 'fa'
+          ? 'دایره موهر در لحظه گسیختگی'
+          : 'Mohr Circle at Failure',
+        xLabel: currentLanguage === 'fa'
+          ? 'تنش نرمال (kPa)'
+          : 'Normal stress (kPa)',
+        yLabel: currentLanguage === 'fa'
+          ? 'تنش برشی (kPa)'
+          : 'Shear stress (kPa)'
+      }
+    );
+
+  } catch (error) {
+    console.error('UU chart error:', error);
+    alert(
+      currentLanguage === 'fa'
+        ? 'خطا در رسم نمودارها. بارگذاری فایل نمودار را بررسی کنید.'
+        : 'Chart rendering failed. Check the chart script loading.'
+    );
+  }
+
+  // Show results after calculations and chart rendering
   $('results').classList.remove('hidden');
-  $('results').scrollIntoView({behavior:'smooth', block:'start'});
+
+  $('results').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
 }
 
 // Navigation
@@ -318,6 +400,7 @@ $('addReading').addEventListener('click', () => addReading());
 $('calculate').addEventListener('click', calculateUU);
 $('printResults').addEventListener('click', () => window.print());
 
+// Language switch
 $('languageBtn').addEventListener('click', () => {
   setLanguage(currentLanguage === 'fa' ? 'en' : 'fa');
 });
@@ -334,4 +417,5 @@ addReading(0, 0);
 addReading(0.5, 0.2);
 addReading(1, 0.4);
 
+// Initial language
 setLanguage('fa');
