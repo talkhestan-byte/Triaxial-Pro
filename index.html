@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#101c32">
-  <title>Triaxial Pro | آزمایش سه‌محوری</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101c32">
+<title>Triaxial Pro</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,129 +23,185 @@
 
 <main class="container">
 
-  <section id="homePage">
-    <div class="welcome">
-      <span class="eyebrow" data-i18n="welcome">LABORATORY SOFTWARE</span>
-      <h2 data-i18n="mainTitle">آزمایش سه‌محوری خاک و سنگ</h2>
-      <p data-i18n="mainDesc">
-        محیط تخصصی انجام محاسبات، تحلیل نتایج و تهیه گزارش آزمایش‌های سه‌محوری
-      </p>
+<section id="homePage">
+  <div class="welcome">
+    <span class="eyebrow">GEOTECHNICAL LABORATORY</span>
+    <h2 data-i18n="mainTitle">آزمایش سه‌محوری خاک و سنگ</h2>
+    <p data-i18n="mainDesc">محیط تخصصی انجام محاسبات و تحلیل نتایج آزمایشگاهی</p>
+  </div>
+
+  <h3 class="section-title" data-i18n="selectMaterial">انتخاب نوع مصالح</h3>
+
+  <div class="material-grid">
+    <button class="material-card soil" id="soilBtn">
+      <div class="material-icon">◈</div>
+      <h3 data-i18n="soil">آزمایش سه‌محوری خاک</h3>
+      <p data-i18n="soilDesc">بررسی رفتار مقاومتی خاک</p>
+      <span class="card-arrow">←</span>
+    </button>
+
+    <button class="material-card rock" id="rockBtn">
+      <div class="material-icon">◆</div>
+      <h3 data-i18n="rock">آزمایش سه‌محوری سنگ</h3>
+      <p data-i18n="rockDesc">بررسی مقاومت فشاری سنگ</p>
+      <span class="card-arrow">←</span>
+    </button>
+  </div>
+
+  <section class="features">
+    <h3 data-i18n="featuresTitle">امکانات نرم‌افزار</h3>
+    <div class="feature-grid">
+      <div class="feature"><span>∑</span><p data-i18n="feature1">محاسبات مهندسی</p></div>
+      <div class="feature"><span>⌁</span><p data-i18n="feature2">نمودارهای تخصصی</p></div>
+      <div class="feature"><span>▤</span><p data-i18n="feature3">گزارش آزمایش</p></div>
+      <div class="feature"><span>◉</span><p data-i18n="feature4">ذخیره اطلاعات</p></div>
+    </div>
+  </section>
+</section>
+
+<section id="soilPage" class="hidden">
+  <button class="back-btn" id="soilBack">← <span data-i18n="back">بازگشت</span></button>
+  <div class="page-heading">
+    <span class="eyebrow">SOIL TRIAXIAL TEST</span>
+    <h2 data-i18n="soilMethods">انتخاب روش آزمایش خاک</h2>
+  </div>
+
+  <div class="method-list">
+    <button class="method-card" data-method="UU">
+      <div class="method-code">UU</div>
+      <div><h3>Unconsolidated Undrained</h3><p data-i18n="uuDesc">تحکیم‌نیافته و زهکشی‌نشده</p></div>
+      <span>←</span>
+    </button>
+    <button class="method-card" data-method="CU">
+      <div class="method-code">CU</div>
+      <div><h3>Consolidated Undrained</h3><p data-i18n="cuDesc">تحکیم‌یافته و زهکشی‌نشده</p></div>
+      <span>←</span>
+    </button>
+    <button class="method-card" data-method="CD">
+      <div class="method-code">CD</div>
+      <div><h3>Consolidated Drained</h3><p data-i18n="cdDesc">تحکیم‌یافته و زهکشی‌شده</p></div>
+      <span>←</span>
+    </button>
+  </div>
+</section>
+
+<section id="rockPage" class="hidden">
+  <button class="back-btn" id="rockBack">← <span data-i18n="back">بازگشت</span></button>
+  <div class="page-heading">
+    <span class="eyebrow">ROCK TRIAXIAL TEST</span>
+    <h2 data-i18n="rockTitle">آزمایش سه‌محوری سنگ</h2>
+    <p data-i18n="rockMethodDesc">استاندارد ASTM D7012</p>
+  </div>
+  <div class="coming-card">
+    <h3>ASTM D7012</h3>
+    <p data-i18n="rockComing">بخش آزمایش سنگ در مرحله توسعه قرار دارد.</p>
+  </div>
+</section>
+
+<section id="uuPage" class="hidden">
+  <button class="back-btn" id="uuBack">← <span data-i18n="back">بازگشت</span></button>
+
+  <div class="page-heading">
+    <span class="eyebrow">SOIL / UU TEST</span>
+    <h2 data-i18n="uuTitle">آزمایش سه‌محوری UU</h2>
+    <p data-i18n="uuSubtitle">تحکیم‌نیافته و زهکشی‌نشده</p>
+  </div>
+
+  <div class="notice">
+    <strong data-i18n="calculationBasis">مبنای محاسبات</strong>
+    <p data-i18n="basisText">فرض حجم ثابت در برش و نمونه اشباع؛ اصلاح سطح مقطع بر این مبنا انجام می‌شود.</p>
+  </div>
+
+  <div class="form-card">
+    <h3 data-i18n="sampleInfo">۱. مشخصات نمونه</h3>
+    <div class="form-grid">
+      <label><span data-i18n="sampleName">شناسه نمونه</span>
+        <input id="sampleName" type="text" placeholder="UU-01" value="UU-01">
+      </label>
+      <label><span data-i18n="diameter">قطر اولیه (mm)</span>
+        <input id="diameter" type="number" min="0.01" step="any" value="38">
+      </label>
+      <label><span data-i18n="height">ارتفاع اولیه (mm)</span>
+        <input id="height" type="number" min="0.01" step="any" value="76">
+      </label>
+      <label><span data-i18n="confining">فشار محصورکننده σ₃ (kPa)</span>
+        <input id="confining" type="number" min="0" step="any" value="100">
+      </label>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3 data-i18n="readings">۲. قرائت‌های آزمایش</h3>
+    <p class="hint" data-i18n="readingHint">تغییر طول و نیروی محوری هر قرائت را وارد کنید.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="row">ردیف</th>
+            <th data-i18n="deformation">تغییر طول (mm)</th>
+            <th data-i18n="load">نیروی محوری (kN)</th>
+            <th data-i18n="delete">حذف</th>
+          </tr>
+        </thead>
+        <tbody id="readingsBody"></tbody>
+      </table>
     </div>
 
-    <h3 class="section-title" data-i18n="selectMaterial">انتخاب نوع مصالح</h3>
-
-    <div class="material-grid">
-
-      <button class="material-card soil" id="soilBtn">
-        <div class="material-icon">◈</div>
-        <h3 data-i18n="soil">آزمایش سه‌محوری خاک</h3>
-        <p data-i18n="soilDesc">بررسی رفتار مقاومتی خاک در شرایط مختلف زهکشی</p>
-        <span class="card-arrow">←</span>
-      </button>
-
-      <button class="material-card rock" id="rockBtn">
-        <div class="material-icon">◆</div>
-        <h3 data-i18n="rock">آزمایش سه‌محوری سنگ</h3>
-        <p data-i18n="rockDesc">بررسی مقاومت فشاری و پارامترهای مقاومتی سنگ</p>
-        <span class="card-arrow">←</span>
-      </button>
-
+    <div class="actions">
+      <button class="secondary-btn" id="addReading">+ <span data-i18n="addReading">افزودن قرائت</span></button>
+      <button class="primary-btn" id="calculate"> <span data-i18n="calculate">محاسبه نتایج</span></button>
     </div>
+  </div>
 
-    <section class="features">
-      <h3 data-i18n="featuresTitle">امکانات نرم‌افزار</h3>
-      <div class="feature-grid">
-        <div class="feature">
-          <span>∑</span>
-          <p data-i18n="feature1">محاسبات مهندسی</p>
-        </div>
-        <div class="feature">
-          <span>⌁</span>
-          <p data-i18n="feature2">نمودارهای تخصصی</p>
-        </div>
-        <div class="feature">
-          <span>▤</span>
-          <p data-i18n="feature3">گزارش آزمایش</p>
-        </div>
-        <div class="feature">
-          <span>◉</span>
-          <p data-i18n="feature4">ذخیره اطلاعات</p>
-        </div>
+  <section id="results" class="hidden">
+    <h3 class="section-title" data-i18n="resultsTitle">۳. نتایج محاسبات</h3>
+
+    <div class="result-grid">
+      <div class="result-card">
+        <span data-i18n="peakDeviator">بیشینه تنش انحرافی</span>
+        <strong id="peakQ">—</strong>
+        <small>kPa</small>
       </div>
-    </section>
+      <div class="result-card">
+        <span data-i18n="undrainedStrength">مقاومت برشی زهکشی‌نشده</span>
+        <strong id="su">—</strong>
+        <small>kPa</small>
+      </div>
+      <div class="result-card">
+        <span data-i18n="peakStrain">کرنش در نقطه اوج</span>
+        <strong id="peakStrain">—</strong>
+        <small>%</small>
+      </div>
+      <div class="result-card">
+        <span data-i18n="majorStress">تنش اصلی بزرگ در اوج</span>
+        <strong id="sigma1">—</strong>
+        <small>kPa</small>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 data-i18n="calculatedTable">جدول نتایج قرائت‌ها</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th data-i18n="strain">کرنش (%)</th>
+              <th data-i18n="area">سطح مقطع (mm²)</th>
+              <th data-i18n="deviator">تنش انحرافی (kPa)</th>
+              <th data-i18n="major">تنش اصلی بزرگ (kPa)</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+      <button class="secondary-btn" id="printResults" data-i18n="print">چاپ نتایج</button>
+    </div>
+
+    <p class="hint" id="resultNote"></p>
   </section>
-
-  <section id="soilPage" class="hidden">
-    <button class="back-btn" id="soilBack">← <span data-i18n="back">بازگشت</span></button>
-
-    <div class="page-heading">
-      <span class="eyebrow">SOIL TRIAXIAL TEST</span>
-      <h2 data-i18n="soilMethods">انتخاب روش آزمایش خاک</h2>
-      <p data-i18n="methodDesc">روش موردنظر را انتخاب کنید.</p>
-    </div>
-
-    <div class="method-list">
-      <button class="method-card" data-method="UU">
-        <div class="method-code">UU</div>
-        <div>
-          <h3>Unconsolidated Undrained</h3>
-          <p data-i18n="uuDesc">تحکیم‌نیافته و زهکشی‌نشده</p>
-        </div>
-        <span>←</span>
-      </button>
-
-      <button class="method-card" data-method="CU">
-        <div class="method-code">CU</div>
-        <div>
-          <h3>Consolidated Undrained</h3>
-          <p data-i18n="cuDesc">تحکیم‌یافته و زهکشی‌نشده</p>
-        </div>
-        <span>←</span>
-      </button>
-
-      <button class="method-card" data-method="CD">
-        <div class="method-code">CD</div>
-        <div>
-          <h3>Consolidated Drained</h3>
-          <p data-i18n="cdDesc">تحکیم‌یافته و زهکشی‌شده</p>
-        </div>
-        <span>←</span>
-      </button>
-    </div>
-  </section>
-
-  <section id="rockPage" class="hidden">
-    <button class="back-btn" id="rockBack">← <span data-i18n="back">بازگشت</span></button>
-
-    <div class="page-heading">
-      <span class="eyebrow">ROCK TRIAXIAL TEST</span>
-      <h2 data-i18n="rockTitle">آزمایش سه‌محوری سنگ</h2>
-      <p data-i18n="rockMethodDesc">انتخاب استاندارد و روش آزمایش</p>
-    </div>
-
-    <div class="method-list">
-      <button class="method-card" data-method="ROCK">
-        <div class="method-code">ASTM</div>
-        <div>
-          <h3>ASTM D7012</h3>
-          <p data-i18n="rockTestDesc">آزمایش فشاری تک‌محوری و سه‌محوری مغزه سنگ</p>
-        </div>
-        <span>←</span>
-      </button>
-    </div>
-  </section>
-
-  <section id="comingPage" class="hidden">
-    <button class="back-btn" id="comingBack">← <span data-i18n="back">بازگشت</span></button>
-    <div class="coming-card">
-      <div class="coming-icon">⚙</div>
-      <h2 id="selectedMethod">UU</h2>
-      <h3 data-i18n="development">بخش آزمایش در حال توسعه است</h3>
-      <p data-i18n="developmentDesc">
-        فرم ورود اطلاعات و موتور محاسبات این بخش در مرحله بعد پیاده‌سازی خواهد شد.
-      </p>
-    </div>
-  </section>
+</section>
 
 </main>
 
