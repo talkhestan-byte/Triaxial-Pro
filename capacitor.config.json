@@ -1,0 +1,9 @@
+
+{
+  "appId": "com.talkhestan.triaxialuu",
+  "appName": "آزمایش سه‌محوری",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}
