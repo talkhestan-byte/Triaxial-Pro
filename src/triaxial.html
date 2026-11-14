@@ -155,4 +155,16 @@ async function out(share){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click()
  }catch(e){alert('خطا: '+e.message)}}
 render();
-</script></body></html>
+</script>
+ 
+<script type="module">
+import { Filesystem } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
+
+window.NativePlugins = {
+  Filesystem,
+  Share
+};
+</script>
+
+</body></html>
