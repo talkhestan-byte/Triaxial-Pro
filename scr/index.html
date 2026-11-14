@@ -130,7 +130,7 @@ function pdfFrom(cv){const j=atob(cv.toDataURL('image/jpeg',.92).split(',')[1]),
  add('xref\n0 6\n0000000000 65535 f \n'+[1,2,3,4,5].map(n=>String(offs[n]).padStart(10,'0')+' 00000 n \n').join('')+`trailer<</Size 6/Root 1 0 R>>\nstartxref\n${xr}\n%%EOF`);
  return new Blob(parts,{type:'application/pdf'})}
 async function out(share){
- const R=update(),blob=pdfFrom(sheet(R)),name='triaxial_UU_'+(S.info.id||Date.now())+'.pdf',P=window.Capacitor&&Capacitor.Plugins;
+ const R=update(),blob=pdfFrom(sheet(R)),name='triaxial_UU_'+(S.info.id||Date.now())+'.pdf',P=window.NativePlugins;
  try{
   if(P&&P.Filesystem){const b64=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(',')[1]);fr.readAsDataURL(blob)});
    const w=await P.Filesystem.writeFile({path:name,data:b64,directory:share?'CACHE':'DOCUMENTS',recursive:true});
@@ -140,4 +140,16 @@ async function out(share){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click()
  }catch(e){alert('خطا: '+e.message)}}
 render();
-</script></body></html>
+</script>
+ 
+<script type="module">
+import { Filesystem } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
+
+window.NativePlugins = {
+  Filesystem,
+  Share
+};
+</script>
+
+</body></html>
