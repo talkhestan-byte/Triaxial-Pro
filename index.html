@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101c32">
+<meta name="theme-color" content="#ffffff">
 <title>Triaxial Pro</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -99,13 +99,11 @@
 
 <section id="rockPage" class="hidden">
   <button class="back-btn" id="rockBack">← <span data-i18n="back">بازگشت</span></button>
-
   <div class="page-heading">
     <span class="eyebrow">ROCK TRIAXIAL TEST</span>
     <h2 data-i18n="rockTitle">آزمایش سه‌محوری سنگ</h2>
     <p data-i18n="rockMethodDesc">استاندارد ASTM D7012</p>
   </div>
-
   <div class="coming-card">
     <h3>ASTM D7012</h3>
     <p data-i18n="rockComing">بخش آزمایش سنگ در مرحله توسعه قرار دارد.</p>
@@ -123,47 +121,93 @@
 
   <div class="notice">
     <strong data-i18n="calculationBasis">مبنای محاسبات</strong>
-    <p data-i18n="basisText">فرض حجم ثابت در برش و نمونه اشباع؛ اصلاح سطح مقطع بر این مبنا انجام می‌شود.</p>
+    <p data-i18n="basisText">
+      اصلاح سطح مقطع با فرض حجم ثابت در مرحله برش انجام می‌شود.
+    </p>
   </div>
 
   <div class="form-card">
-    <h3 data-i18n="sampleInfo">۱. مشخصات نمونه</h3>
+    <h3 data-i18n="commonInfo">۱. مشخصات مشترک نمونه‌ها</h3>
 
     <div class="form-grid">
       <label>
-        <span data-i18n="sampleName">شناسه نمونه</span>
-        <input id="sampleName" type="text" placeholder="UU-01" value="UU-01">
-      </label>
-
-      <label>
         <span data-i18n="diameter">قطر اولیه (mm)</span>
-        <input id="diameter" type="number" min="0.01" step="any" value="38">
+        <input id="diameter" class="numeric-input" type="text"
+          inputmode="decimal" dir="ltr" value="38">
       </label>
 
       <label>
         <span data-i18n="height">ارتفاع اولیه (mm)</span>
-        <input id="height" type="number" min="0.01" step="any" value="76">
+        <input id="height" class="numeric-input" type="text"
+          inputmode="decimal" dir="ltr" value="76">
       </label>
+    </div>
+    <p class="hint" data-i18n="commonHint">
+      ابعاد اولیه برای هر سه نمونه یکسان در نظر گرفته شده است.
+    </p>
+  </div>
 
-      <label>
-        <span data-i18n="confining">فشار محصورکننده σ₃ (kPa)</span>
-        <input id="confining" type="number" min="0" step="any" value="100">
-      </label>
+  <div class="form-card">
+    <h3 data-i18n="specimenInfo">۲. مشخصات سه نمونه آزمایش</h3>
+
+    <div class="specimen-grid">
+      <div class="specimen-card">
+        <h4 data-i18n="specimen1">نمونه اول</h4>
+        <label>
+          <span data-i18n="sampleName">شناسه نمونه</span>
+          <input id="sampleName1" type="text" value="UU-01" dir="ltr">
+        </label>
+        <label>
+          <span data-i18n="confining">فشار محصورکننده (kPa)</span>
+          <input id="confining1" class="numeric-input" type="text"
+            inputmode="decimal" dir="ltr" value="50">
+        </label>
+      </div>
+
+      <div class="specimen-card">
+        <h4 data-i18n="specimen2">نمونه دوم</h4>
+        <label>
+          <span data-i18n="sampleName">شناسه نمونه</span>
+          <input id="sampleName2" type="text" value="UU-02" dir="ltr">
+        </label>
+        <label>
+          <span data-i18n="confining">فشار محصورکننده (kPa)</span>
+          <input id="confining2" class="numeric-input" type="text"
+            inputmode="decimal" dir="ltr" value="100">
+        </label>
+      </div>
+
+      <div class="specimen-card">
+        <h4 data-i18n="specimen3">نمونه سوم</h4>
+        <label>
+          <span data-i18n="sampleName">شناسه نمونه</span>
+          <input id="sampleName3" type="text" value="UU-03" dir="ltr">
+        </label>
+        <label>
+          <span data-i18n="confining">فشار محصورکننده (kPa)</span>
+          <input id="confining3" class="numeric-input" type="text"
+            inputmode="decimal" dir="ltr" value="200">
+        </label>
+      </div>
     </div>
   </div>
 
   <div class="form-card">
-    <h3 data-i18n="readings">۲. قرائت‌های آزمایش</h3>
-    <p class="hint" data-i18n="readingHint">تغییر طول و نیروی محوری هر قرائت را وارد کنید.</p>
+    <h3 data-i18n="readings">۳. قرائت‌های آزمایش</h3>
+    <p class="hint" data-i18n="readingHint">
+      نیروی محوری هر سه نمونه را در ردیف تغییر طول مربوط وارد کنید.
+    </p>
 
-    <div class="table-wrap">
-      <table>
+    <div class="reading-info" id="readingInfo"></div>
+
+    <div class="table-wrap readings-wrap">
+      <table class="readings-table">
         <thead>
           <tr>
-            <th data-i18n="row">ردیف</th>
-            <th data-i18n="deformation">تغییر طول (mm)</th>
-            <th data-i18n="load">نیروی محوری (kN)</th>
-            <th data-i18n="delete">حذف</th>
+            <th class="fixed-column" data-i18n="deformation">تغییر طول (mm)</th>
+            <th data-i18n="load1">نیروی نمونه اول (kN)</th>
+            <th data-i18n="load2">نیروی نمونه دوم (kN)</th>
+            <th data-i18n="load3">نیروی نمونه سوم (kN)</th>
           </tr>
         </thead>
         <tbody id="readingsBody"></tbody>
@@ -171,10 +215,6 @@
     </div>
 
     <div class="actions">
-      <button class="secondary-btn" id="addReading">
-        + <span data-i18n="addReading">افزودن قرائت</span>
-      </button>
-
       <button class="primary-btn" id="calculate">
         <span data-i18n="calculate">محاسبه نتایج</span>
       </button>
@@ -182,46 +222,22 @@
   </div>
 
   <section id="results" class="hidden">
-    <h3 class="section-title" data-i18n="resultsTitle">۳. نتایج محاسبات</h3>
+    <h3 class="section-title" data-i18n="resultsTitle">۴. نتایج محاسبات</h3>
 
-    <div class="result-grid">
-      <div class="result-card">
-        <span data-i18n="peakDeviator">بیشینه تنش انحرافی</span>
-        <strong id="peakQ">—</strong>
-        <small>kPa</small>
-      </div>
-
-      <div class="result-card">
-        <span data-i18n="undrainedStrength">مقاومت برشی زهکشی‌نشده</span>
-        <strong id="su">—</strong>
-        <small>kPa</small>
-      </div>
-
-      <div class="result-card">
-        <span data-i18n="peakStrain">کرنش در نقطه اوج</span>
-        <strong id="peakStrain">—</strong>
-        <small>%</small>
-      </div>
-
-      <div class="result-card">
-        <span data-i18n="majorStress">تنش اصلی بزرگ در اوج</span>
-        <strong id="sigma1">—</strong>
-        <small>kPa</small>
-      </div>
-    </div>
+    <div class="specimen-results" id="specimenResults"></div>
 
     <div class="form-card">
-      <h3 data-i18n="calculatedTable">جدول نتایج قرائت‌ها</h3>
-
+      <h3 data-i18n="calculatedTable">جدول نتایج محاسباتی</h3>
       <div class="table-wrap">
-        <table>
+        <table class="result-table">
           <thead>
             <tr>
-              <th>#</th>
+              <th data-i18n="deformation">تغییر طول (mm)</th>
               <th data-i18n="strain">کرنش (%)</th>
               <th data-i18n="area">سطح مقطع (mm²)</th>
-              <th data-i18n="deviator">تنش انحرافی (kPa)</th>
-              <th data-i18n="major">تنش اصلی بزرگ (kPa)</th>
+              <th data-i18n="q1">تنش انحرافی ۱</th>
+              <th data-i18n="q2">تنش انحرافی ۲</th>
+              <th data-i18n="q3">تنش انحرافی ۳</th>
             </tr>
           </thead>
           <tbody id="resultsBody"></tbody>
@@ -229,27 +245,27 @@
       </div>
     </div>
 
-    <!-- UU Charts -->
-
     <div class="form-card">
-      <h3 data-i18n="stressStrainChartTitle">
-        نمودار تنش انحرافی–کرنش محوری
-      </h3>
-      <div id="uuStressStrainChart"></div>
+      <h3 data-i18n="stressStrainChartTitle">نمودار تنش انحرافی–کرنش محوری</h3>
+      <div id="uuStressStrainChart" class="chart-container"></div>
     </div>
 
     <div class="form-card">
-      <h3 data-i18n="mohrChartTitle">
-        دایره موهر در لحظه گسیختگی
-      </h3>
-      <div id="uuMohrChart"></div>
+      <h3 data-i18n="mohrChartTitle">سه دایره موهر در لحظه گسیختگی</h3>
+      <div id="uuMohrChart" class="chart-container"></div>
     </div>
 
-    <p class="hint" id="resultNote"></p>
+    <div class="form-card">
+      <h3 data-i18n="strengthParameters">پارامترهای مقاومت برشی</h3>
+      <div id="strengthParameters" class="strength-parameters"></div>
+      <p class="hint" id="resultNote"></p>
+    </div>
 
-    <button class="secondary-btn" id="printResults" data-i18n="print">
-      چاپ نتایج
-    </button>
+    <div class="print-actions">
+      <button class="primary-btn" id="printResults" data-i18n="print">
+        چاپ نتایج
+      </button>
+    </div>
   </section>
 </section>
 
@@ -260,10 +276,6 @@
   <span data-i18n="footer">نرم‌افزار تخصصی مهندسی ژئوتکنیک</span>
 </footer>
 
-<!-- Scripts: dependency order is important -->
-<script src="calculations/uu.js"></script>
-<script src="charts/uu-charts.js"></script>
 <script src="src.js"></script>
-
 </body>
 </html>
