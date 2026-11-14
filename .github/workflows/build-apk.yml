@@ -44,8 +44,12 @@ jobs:
         run: npx cap add android
 
       - name: Generate app icons
-        run: npx --yes @capacitor/assets generate --android
-
+        run: |
+          echo "--- assets folder ---"
+          ls -la assets || echo "assets folder NOT FOUND"
+          npx --yes @capacitor/assets generate --android
+          echo "--- generated icons ---"
+          find android/app/src/main/res -name "ic_launcher*" | sort
       - name: Sync Capacitor
         run: npx cap sync android
 
